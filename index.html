@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo para Todos</title>
+    <!--BIBLIOTECA PARA EXPORTAR O HTML FORMATADO EM PDF-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <div class="container-header">
+        <header id="header-principal">
+            <div class="cabecalho">
+                <h1 id="titulo">CURRÍCULO PARA TODOS</h1>
+                <h3 id="subtitulo">Ferramenta para a criação de currículos profissionais</h3>
+            </div>
+            <nav class="menu">
+                <button onclick="mostrarSecao('secao2')">Início</button>
+                <button onclick="mostrarSecao('secao3')">Tutorial e Dicas</button>
+            </nav>
+        </header>
+    </div>
+
+    <!--PÁGINA INICIAL-->
+    <section class="secao ativa" id="secao1">
+        <h1>CURRÍCULO PARA TODOS</h1>
+        <h3>Ferramenta para a criação de currículos profissionais</h3>
+
+        <button onclick="mostrarSecao('secao2')" id="bt-inicio">Começar</button>
+    </section>
+
+    <!--PÁGINA PRINCIPAL-->
+    <section class="secao" id="secao2">
+
+        <h3 id="info_form">Preencha o formulário abaixo e clique em "Enviar" para gerar o seu currículo</h3>
+
+        <div class="container">
+            <form class="formulario">
+                <label class="secao-formulario">Informações Pessoais</label><br>
+
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required /><br>
+
+                <label for="cargo">Cargo Pretendido:</label>
+                <input type="text" id="cargo" name="cargo" placeholder="Exemplo: Assistente Administrativo"
+                    required /><br>
+
+                <label for="telefone1">Telefone:</label>
+                <input type="tel" id="telefone1" name="telefone1" required /><br>
+
+                <label for="telefone2">Telefone 2 (opcional):</label>
+                <input type="tel" id="telefone2" name="telefone2" /><br>
+
+                <label>Email:</label>
+                <i class="fa fa-exclamation-circle info_icon"
+                    data-info="Lembre-se de verificar se o e-mail de contato foi escrito corretamente. De preferência, crie um e-mail apenas para fins profissionais."
+                    aria-hidden="true"></i>
+                <input type="email" id="email" name="email" required><br>
+
+                <div class="linha-form sem-quebra">
+
+                    <label>Estado:</label>
+                    <select name="estado" id="estado" required>
+                        <option value="selecione" selected>SELECIONE</option>
+                        <option value="AC">ACRE</option>
+                        <option value="AL">ALAGOAS</option>
+                        <option value="AP">AMAPÁ</option>
+                        <option value="AM">AMAZONAS</option>
+                        <option value="BA">BAHIA</option>
+                        <option value="CE">CEARÁ</option>
+                        <option value="DF">DISTRITO FEDERAL</option>
+                        <option value="ES">ESPÍRITO SANTO</option>
+                        <option value="GO">GOIÁS</option>
+                        <option value="MA">MARANHÃO</option>
+                        <option value="MT">MATO GROSSO</option>
+                        <option value="MS">MATO GROSSO DO SUL</option>
+                        <option value="MG">MINAS GERAIS</option>
+                        <option value="PA">PARÁ</option>
+                        <option value="PB">PARAÍBA</option>
+                        <option value="PR">PARANÁ</option>
+                        <option value="PE">PERNAMBUCO</option>
+                        <option value="PI">PIAUÍ</option>
+                        <option value="RJ">RIO DE JANEIRO</option>
+                        <option value="RN">RIO GRANDE DO NORTE</option>
+                        <option value="RS">RIO GRANDE DO SUL</option>
+                        <option value="RO">RONDÔNIA</option>
+                        <option value="RR">RORAIMA</option>
+                        <option value="SC">SANTA CATARINA</option>
+                        <option value="SP">SÃO PAULO</option>
+                        <option value="SE">SERGIPE</option>
+                        <option value="TO">TOCANTINS</option>
+                    </select>
+
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" required /><br>
+
+                </div>
+
+                <label>Bairro:</label>
+                <input type="text" id="bairro" name="bairro" required /><br>
+
+                <label class="secao-formulario">Objetivos</label>
+                <i class="fa fa-exclamation-circle info_icon"
+                    data-info='Os objetivos devem ser claros, diretos e específicos para o cargo que você deseja se candidatar. Lembre-se de usar os verbos no infinitivo. Em caso de dúvidas, vá até a aba "Tutorial e Dicas".'
+                    aria-hidden="true"></i><br>
+                <textarea id="objetivos" name="objetivos" required></textarea><br>
+
+                <label class="secao-formulario">Formação</label>
+                <div id="formacoes"></div>
+                <button type="button" onclick="adicionarFormacao()">+ Adicionar Formação</button><br>
+
+                <label class="secao-formulario">Experiência Profissional</label>
+                <i class="fa fa-exclamation-circle info_icon"
+                    data-info='Informe suas experiências de trabalho ou estágio. Preencha o cargo, a empresa ou instituição, o período e descreva o que você fazia nessa função. Exemplo: atendimento ao público, organização de documentos, suporte técnico.'
+                    aria-hidden="true"></i>
+                <div id="experiencias"></div>
+                <button type="button" onclick="adicionarExperiencia()">+ Adicionar Experiência</button><br>
+
+                <label class="secao-formulario">Formação Extracurricular (opcional)</label>
+                <i class="fa fa-exclamation-circle info_icon"
+                    data-info="Informe cursos, projetos ou atividades realizadas fora da grade escolar ou faculdade."
+                    aria-hidden="true"></i>
+                <div id="extracurricular"></div>
+                <button type="button" onclick="adicionarExtracurricular()">+ Adicionar Formação
+                    Extracurricular</button><br><br>
+
+                <button type="submit" id="bt_enviar">Enviar</button>
+
+            </form>
+        </div>
+    </section>
+
+    <!--TUTORIAL E DICAS-->
+    <section class="secao" id="secao3">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/HVNHut4hZ-E" title="Vídeo de apresentação" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <a href="arquivos/exemplo-currículo.pdf" download class="btn-pdf">
+            Clique aqui para baixar o exemplo mostrado no vídeo
+        </a>
+    </section>
+
+    <!--RODAPÉ-->
+    <div class="container-rodape">
+        <footer id="rodape">
+            <h3>Criado por Andressa Campeche | 2026</h3><br>
+        </footer>
+    </div>
+
+
+    <script src="script.js"></script>
+
+    <!--BLOCO QUE IRÁ GERAR O PDF-->
+    <div id="curriculo" class="curriculo" style="display: none;">
+
+        <h1 id="cv-nome"></h1>
+        <h2 id="cv-cargo"></h2>
+
+        <p id="cv-contato"></p>
+
+        <h3>Objetivos</h3>
+        <p id="cv-objetivo"></p>
+
+        <h3>Formação</h3>
+        <div id="cv-formacoes"></div>
+
+        <div id="secao-experiencias">
+            <h3>Experiência Profissional</h3>
+            <div id="cv-experiencias"></div>
+        </div>
+
+        <div id="secao-extracurricular">
+            <h3>Formação Extracurricular</h3>
+            <div id="cv-extracurricular"></div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
